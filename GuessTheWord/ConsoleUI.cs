@@ -4,12 +4,7 @@ namespace GuessTheWord
 {
     public class ConsoleUI
     {
-        public char InputLetter()
-        {
-            string result = Console.ReadLine();
-            
-            return result[0];
-        }
+       
 
         public DifficultyType ChooseDifficulty()
         {
@@ -17,14 +12,7 @@ namespace GuessTheWord
                               "1 - Easy\n" +
                               "2 - Normal\n" +
                               "3 - Hard");
-
             string result = Console.ReadLine();
-
-            if (result != "1" && result != "2" && result != "3")
-            {
-                Console.WriteLine("Invalid input! Default = Easy");
-                return DifficultyType.Easy;
-            }
 
             switch (result)
             {
@@ -34,9 +22,10 @@ namespace GuessTheWord
                     return DifficultyType.Normal;
                 case "3":
                     return DifficultyType.Hard;
+                default:
+                    return DifficultyType.Easy;
+                    
             }
-
-            return DifficultyType.Easy;
         }
 
         public void ShowUsedLetters (char[] letters)

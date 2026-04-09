@@ -6,6 +6,8 @@ namespace GuessTheWord
     {
         public char InputLetter()
         {
+            
+            
             do
             {
                 Console.Clear();

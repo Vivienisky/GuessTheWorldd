@@ -4,7 +4,29 @@ namespace GuessTheWord
 {
     public class ConsoleUI
     {
-       
+
+        public char InputLetter()
+        {
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Input letter:");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                    continue;
+
+                bool isTooBig = input.Length != 1;
+
+                if (isTooBig)
+                    continue;
+
+                bool IsLetter = char.IsLetter(input[0]);
+                if (IsLetter)
+                    return input.ToUpper()[0];
+
+            } while (true);
+        }
 
         public DifficultyType ChooseDifficulty()
         {
@@ -28,15 +50,15 @@ namespace GuessTheWord
             }
         }
 
-        public void ShowUsedLetters (char[] letters)
+        public void ShowUsedLetters(char[] letters)
         {
             Console.WriteLine("Used letters:");
-            
+
             foreach (char letter in letters)
             {
                 Console.Write($"{letter} ");
             }
-            
+
             Console.WriteLine();
         }
 
@@ -53,8 +75,8 @@ namespace GuessTheWord
         public void ShowGameResult(bool isWin)
         {
             Console.WriteLine(isWin ? "You won!" : "You lost!");
-        } 
-        
-        
+        }
+
+
     }
 }

@@ -17,7 +17,14 @@ namespace GuessTheWord
                               "1 - Easy\n" +
                               "2 - Normal\n" +
                               "3 - Hard");
+
             string result = Console.ReadLine();
+
+            if (result != "1" && result != "2" && result != "3")
+            {
+                Console.WriteLine("Invalid input! Default = Easy");
+                return DifficultyType.Easy;
+            }
 
             switch (result)
             {
@@ -27,10 +34,9 @@ namespace GuessTheWord
                     return DifficultyType.Normal;
                 case "3":
                     return DifficultyType.Hard;
-                default:
-                    return DifficultyType.Easy;
-                    
             }
+
+            return DifficultyType.Easy;
         }
 
         public void ShowUsedLetters (char[] letters)
@@ -59,5 +65,7 @@ namespace GuessTheWord
         {
             Console.WriteLine(isWin ? "You won!" : "You lost!");
         } 
+        
+        
     }
 }

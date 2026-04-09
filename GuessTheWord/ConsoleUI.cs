@@ -17,7 +17,7 @@ namespace GuessTheWord
                 if (string.IsNullOrEmpty(input))
                     continue;
 
-                if (input.Length == 1)
+                if (input.Length != 1)
                     continue;
 
                 bool IsLetter = char.IsLetter(input[0]);

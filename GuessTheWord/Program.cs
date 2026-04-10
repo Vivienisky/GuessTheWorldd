@@ -7,34 +7,40 @@ namespace GuessTheWord
     {
         public static void Main(string[] args)
         {
-            var game = new Game(attemptsMax:10);
-            game.AddLetter('a', isGuessed: true);
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             
+            var ui = new ConsoleUI();
+            var wordBank = new WordBank();
             
-            var usedLetters = new HashSet<char>();
-            usedLetters.Add('a');
-            usedLetters.Add('b');
+            ui.ShowWelcomeMessage();
             
-            char newLetter = 'a';
+            bool playAgain = true;
             
-            if (!usedLetters.Contains(newLetter))
-                usedLetters.Add('a');
-            
-            var dictionary =  new Dictionary<DifficultyType, int>();
-            dictionary[DifficultyType.Easy] = 4;
-            dictionary[DifficultyType.Normal] = 2;
-            dictionary[DifficultyType.Hard] = 0;
-
-            if (dictionary.TryGetValue(DifficultyType.Easy, out int result))
+            while (playAgain)
             {
+
+                DifficultyType difficultyType = ui.ChooseDifficulty();
+                var difficulty = new Difficulty(difficultyType);
                 
+
+                Word word = wordBank.Generate(difficulty);
+                
+  
+                var game = new Game(difficulty.Attempts);
+                
+
+                game.RunGameLoop(ui, word);
+                playAgain = ui.AskForNewGame();
+                
+                if (playAgain)
+                {
+                    Console.Clear();
+                    ui.ShowWelcomeMessage();
+                }
             }
-
-        }
-
-        private void InitCharactersArray(int maxAttempts)
-        {
-            var characters = new char[maxAttempts];
+            
+            Console.WriteLine("Спасибо за игру! До свидания!");
+            Console.ReadKey();
         }
     }
 }
